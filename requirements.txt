@@ -1,2 +1,3 @@
 python-decouple
 langchain-openai
+pydantic
