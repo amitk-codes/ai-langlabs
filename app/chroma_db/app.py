@@ -1,7 +1,7 @@
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_chroma import Chroma
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from decouple import config
 import os
 
@@ -15,3 +15,11 @@ text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 document = text_splitter.split_documents(loaded_content)
 
 embedding = OpenAIEmbeddings(api_key=config("OPENAI_API_KEY"))
+
+db = Chroma.from_documents(document, embedding)
+
+query = "rise of AI"
+
+similar_docs = db.similarity_search(query)
+
+print(similar_docs)
