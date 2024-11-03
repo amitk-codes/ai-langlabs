@@ -2,3 +2,4 @@ python-decouple
 langchain-openai
 langchain_community
 pydantic
+pdfminer.six
