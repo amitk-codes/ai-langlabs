@@ -6,6 +6,7 @@ from decouple import config
 import os
 
 file_path = os.path.abspath('assets/long_text_doc.txt')
+persist_file_path = os.path.abspath('app/chroma_db')
 
 loader = TextLoader(file_path)
 loaded_content = loader.load()
@@ -16,7 +17,7 @@ document = text_splitter.split_documents(loaded_content)
 
 embedding = OpenAIEmbeddings(api_key=config("OPENAI_API_KEY"))
 
-db = Chroma.from_documents(document, embedding)
+db = Chroma.from_documents(document, embedding, persist_directory=persist_file_path)
 
 query = "rise of AI"
 
